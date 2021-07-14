@@ -178,7 +178,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="92dp"
-            android:background="@drawable/border"
+            android:background="@drawable/border2"
             app:layout_constraintTop_toBottomOf="@id/gd_top1"
             app:layout_constraintBottom_toTopOf="@id/gd_bottom1"
             app:layout_constraintLeft_toRightOf="@id/gd_left1"
@@ -193,14 +193,14 @@
 
                     <com.google.android.material.appbar.CollapsingToolbarLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                            <androidx.appcompat.widget.Toolbar
+                            <com.google.android.material.appbar.MaterialToolbar
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:background="@drawable/border"
-                                app:layout_scrollFlags="scroll|enterAlways"
+                                app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
                                 app:layout_collapseMode="pin">
 
                                 <LinearLayout
@@ -226,7 +226,7 @@
                                         app:srcCompat="@drawable/arrow_up"
                                         />
                                 </LinearLayout>
-                         </androidx.appcompat.widget.Toolbar>
+                         </com.google.android.material.appbar.MaterialToolbar>
                     </com.google.android.material.appbar.CollapsingToolbarLayout>
             </com.google.android.material.appbar.AppBarLayout>
 
@@ -347,7 +347,7 @@
                 android:id="@+id/img3_main"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/music_sync"
+                app:srcCompat="@drawable/icon_music"
                 android:adjustViewBounds="true"
                 android:layout_gravity="center"
                 android:layout_weight="1.5"/>
@@ -358,6 +358,8 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:progressTint="#344CD3"
+            android:progressBackgroundTint="#201F1F"
             app:layout_constraintTop_toBottomOf="@id/coordinator"
             app:layout_constraintLeft_toRightOf="@id/gd_left1"
             app:layout_constraintRight_toLeftOf="@id/gd_right1"
@@ -370,13 +372,233 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="전환성공!!!"
-            android:textSize="50sp"
-            android:textColor="@color/white"/>
+            android:background="@color/black">
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gd_top1_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="20dp" />
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gd_bottom1_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_end="10dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gd_left1_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="20dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gd_right1_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="20dp"/>
+
+            <LinearLayout
+                android:id="@+id/linearlayout1_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                app:layout_constraintBottom_toTopOf="@id/linearlayout2_2"
+                app:layout_constraintTop_toBottomOf="@id/gd_top1_2"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:weightSum="6"
+                >
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt1_main_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="재생목록 편집"
+                    android:textSize="25sp"
+                    android:adjustViewBounds="true"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:layout_weight="3"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="#5869CC"
+                    android:layout_weight="2"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt4_main_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="완료"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:textColor="#5869CC"
+                    android:layout_weight="1"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearlayout2_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="8"
+                app:layout_constraintLeft_toRightOf="@id/gd_left1_2"
+                app:layout_constraintRight_toLeftOf="@id/gd_right1_2"
+                app:layout_constraintBottom_toTopOf="@id/coordinator_2"
+                android:orientation="horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/music_search"
+                    android:adjustViewBounds="true"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.8"/>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"/>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/music_box"
+                    android:adjustViewBounds="true"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.8"/>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:layout_gravity="center"
+                    android:layout_weight="2.8"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="√선택곡"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.3"/>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="그룹접기"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:layout_weight="1.3"/>
+            </LinearLayout>
+
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:id="@+id/coordinator_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="153dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="92dp"
+                android:background="@drawable/border2"
+                app:layout_constraintTop_toBottomOf="@id/gd_top1_2"
+                app:layout_constraintBottom_toTopOf="@id/gd_bottom1_2"
+                app:layout_constraintLeft_toRightOf="@id/gd_left1_2"
+                app:layout_constraintRight_toLeftOf="@id/gd_right1_2"
+                >
+
+                <com.google.android.material.appbar.AppBarLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border"
+                    app:elevation="0dp">
+
+                    <com.google.android.material.appbar.CollapsingToolbarLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                        <com.google.android.material.appbar.MaterialToolbar
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/border"
+                            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
+                            app:layout_collapseMode="pin">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="10">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_weight="9"
+                                    android:id="@+id/txt3_main_2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="20210319"
+                                    android:textColor="@color/white"
+                                    android:textSize="15sp"/>
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_weight="1"
+                                    android:id="@+id/img1_main_2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:srcCompat="@drawable/arrow_up"
+                                    />
+                            </LinearLayout>
+                        </com.google.android.material.appbar.MaterialToolbar>
+                    </com.google.android.material.appbar.CollapsingToolbarLayout>
+                </com.google.android.material.appbar.AppBarLayout>
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fillViewport="true"
+                    android:descendantFocusability="blocksDescendants"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    >
+                    <ListView
+                        android:id="@+id/listview_main2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:listitem="@layout/item_layout"
+                        android:divider="#201F1F"
+                        />
+                </androidx.core.widget.NestedScrollView>
+
+                <!--<androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_layout"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                </androidx.recyclerview.widget.RecyclerView>
+                -->
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.sothree.slidinguppanel.SlidingUpPanelLayout>

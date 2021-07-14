@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import com.example.practice2.databinding.ItemLayoutBinding
 
-class CustomAdapter(context: Context,private val businessCardArrayList:ArrayList<BusinessCard>) : BaseAdapter() {
+class CustomAdapter(context: Context,private val businessCardArrayList: MutableList<BusinessCard>) : BaseAdapter() {
 
     var inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     lateinit var binding: ItemLayoutBinding

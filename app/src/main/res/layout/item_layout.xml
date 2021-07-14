@@ -35,7 +35,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="음악 이름"
-            android:textColor="@color/white"
+            android:textColor="@drawable/listitem_textcolor_selector"
             android:textSize="15sp" />
 
         <TextView
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="가수 이름"
-            android:textColor="#7C7676"
+            android:textColor="@drawable/listitem_textcolor_selector2"
             android:textSize="10sp" />
     </LinearLayout>
 

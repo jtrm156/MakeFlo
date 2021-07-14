@@ -3,6 +3,7 @@ package com.example.practice2
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
 import androidx.slidingpanelayout.widget.SlidingPaneLayout
 import com.example.practice2.databinding.ActivityMainBinding
 import com.sothree.slidinguppanel.SlidingUpPanelLayout
@@ -11,8 +12,9 @@ data class BusinessCard(val name:String,val contents:String, val img : Int,)
 
 class MainActivity : AppCompatActivity() {
 
-    var businessCardArrayList = ArrayList<BusinessCard>()
+    var businessCardArrayList = mutableListOf<BusinessCard>()
     var i : Boolean = true
+    var j : Boolean = true
     private lateinit var customAdapter : CustomAdapter
     //private lateinit var customAdapter2 : CustomAdapter2
     lateinit var binding:ActivityMainBinding
@@ -70,7 +72,8 @@ class MainActivity : AppCompatActivity() {
             }
             else
             {
-                binding.img2Main.setImageResource(R.drawable.arrow_down)
+                binding.img1Main.setImageResource(R.drawable.arrow_down)
+                binding.listviewMain.visibility = View.VISIBLE
                 i = true
             }
         }
@@ -87,10 +90,35 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        /*
-        binding.listviewMain.setOnClickListener(){
-            binding.img3Main.setImageResource(customAdapter.getItem())
+        binding.drawer.setOnClickListener()
+        {
+            val enabled = slidePanel.isEnabled
+            if(enabled){
+                slidePanel.isEnabled = false
+            }
+            else {
+                slidePanel.isEnabled = true
+            }
         }
-        */
+
+        binding.txt4Main2.setOnClickListener()
+        {
+            val state2 = slidePanel.panelState
+
+            if(state2 == SlidingUpPanelLayout.PanelState.COLLAPSED){
+                slidePanel.panelState = SlidingUpPanelLayout.PanelState.ANCHORED
+            }
+            else if(state2 == SlidingUpPanelLayout.PanelState.EXPANDED){
+                slidePanel.panelState = SlidingUpPanelLayout.PanelState.COLLAPSED
+            }
+        }
+        
+        binding.listviewMain.setOnItemClickListener { parent: AdapterView<*>, view: View, position : Int, id -> Long
+                val item = parent.getItemAtPosition(position) as BusinessCard
+                binding.img3Main.setImageResource(item.img)
+
+        }
+
+
     }
 }
