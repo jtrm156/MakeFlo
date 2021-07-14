@@ -13,21 +13,29 @@ import com.example.practice2.databinding.ItemLayoutBinding
 class CustomAdapter2(private val context: Context, private val businessCardArrayList: MutableList<BusinessCard>) :
     RecyclerView.Adapter<CustomAdapter2.ItemViewHolder>(){
     //Layout들과 RecyclerView를 연결시킬 Adapter(데이터를 받아오고 이를 레이아웃에 직접 연결하는 함수를 실행시키는 클래스)
-    inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        lateinit var binding: ItemLayoutBinding
+    //inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    //    lateinit var binding: ItemLayoutBinding
 
-        fun bind(businessCard: BusinessCard, context: Context){
-            val resourceId = context.resources.getIdentifier(businessCard.img.toString(), "drawable", context.packageName)
-            binding.imgListviewItem.setImageResource(resourceId)
-            binding.contentsListviewItem.text = businessCard.contents
-            binding.nameListviewItem.text = businessCard.name
+    //    fun bind(businessCard: BusinessCard, context: Context){
+    //        val resourceId = context.resources.getIdentifier(businessCard.img.toString(), "drawable", context.packageName)
+    //        binding.imgListviewItem.setImageResource(resourceId)
+    //        binding.contentsListviewItem.text = businessCard.contents
+    //        binding.nameListviewItem.text = businessCard.name
+    lateinit var binding: ItemLayoutBinding
 
+    inner class ItemViewHolder(private val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root)
+        {
+                fun bind(businessCard: BusinessCard, context: Context){
+                    val resourceId = context.resources.getIdentifier(businessCard.img.toString(), "drawable", context.packageName)
+                   binding.imgListviewItem.setImageResource(resourceId)
+                   binding.contentsListviewItem.text = businessCard.contents
+                   binding.nameListviewItem.text = businessCard.name
         }
     } //ViewHolder는 클래스 내에 View를 저장하는 변수를 만들어 그 안에 데이터를 직접 연결시킬 수 있는 클래스, 디자인 패턴
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_layout, parent, false)
-        return ItemViewHolder(view)
+        val binding = ItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ItemViewHolder(binding)
     } //화면을 최초 로딩하여 만들어진 View가 없는 경우 레이아웃을 inflate하여 viewHolder를 생성
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
