@@ -1,4 +1,6 @@
+/*
 package com.example.practice2
+
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -28,3 +30,4 @@ class CustomAdapter(context: Context,private val businessCardArrayList: MutableL
     }
 
 }
+ */

@@ -10,6 +10,7 @@
     android:background="@color/black"
     android:gravity="bottom"
     app:umanoDragView="@id/drawer"
+    app:umanoScrollableView="@id/listview_main2"
     app:umanoPanelHeight="0dp"
     app:umanoOverlay="true"
     app:umanoShadowHeight="0dp">
@@ -237,6 +238,7 @@
                 android:descendantFocusability="blocksDescendants"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                >
+                <!--
                 <ListView
                     android:id="@+id/listview_main"
                     android:layout_width="match_parent"
@@ -244,18 +246,17 @@
                     tools:listitem="@layout/item_layout"
                     android:divider="#201F1F"
                     />
+                -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_layout"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                </androidx.recyclerview.widget.RecyclerView>
             </androidx.core.widget.NestedScrollView>
-
-            <!--<androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_layout"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
-            </androidx.recyclerview.widget.RecyclerView>
-            -->
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <LinearLayout
