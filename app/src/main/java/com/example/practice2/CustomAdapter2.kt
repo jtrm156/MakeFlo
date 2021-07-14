@@ -23,13 +23,24 @@ class CustomAdapter2(private val context: Context, private val businessCardArray
     //        binding.nameListviewItem.text = businessCard.name
     lateinit var binding: ItemLayoutBinding
 
+    interface ItemClickListener{
+        fun onClick(view: View, position: Int)
+        fun onLongClick(view: View, position: Int)
+    }
+
+    private lateinit var itemClickListener : ItemClickListener
+
+    fun setItemClickListener(itemClickListener : ItemClickListener){
+       this.itemClickListener = itemClickListener
+    }
+
     inner class ItemViewHolder(private val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root)
         {
-                fun bind(businessCard: BusinessCard, context: Context){
-                    val resourceId = context.resources.getIdentifier(businessCard.img.toString(), "drawable", context.packageName)
-                   binding.imgListviewItem.setImageResource(resourceId)
-                   binding.contentsListviewItem.text = businessCard.contents
-                   binding.nameListviewItem.text = businessCard.name
+            fun bind(businessCard: BusinessCard, context: Context){
+                val resourceId = context.resources.getIdentifier(businessCard.img.toString(), "drawable", context.packageName)
+                binding.imgListviewItem.setImageResource(resourceId)
+                binding.contentsListviewItem.text = businessCard.contents
+                binding.nameListviewItem.text = businessCard.name
         }
     } //ViewHolder는 클래스 내에 View를 저장하는 변수를 만들어 그 안에 데이터를 직접 연결시킬 수 있는 클래스, 디자인 패턴
 
@@ -40,6 +51,9 @@ class CustomAdapter2(private val context: Context, private val businessCardArray
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.bind(businessCardArrayList[position], context)
+        holder.itemView.setOnClickListener{
+            itemClickListener.onClick(it,position)
+        }
     } //layout의 view와 데이터를 연결
 
     override fun getItemCount(): Int {

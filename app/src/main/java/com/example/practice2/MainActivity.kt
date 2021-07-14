@@ -80,6 +80,7 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         }
+
         /*리스트뷰 사용
         //customAdapter = CustomAdapter(this,businessCardArrayList)
         //binding.listviewMain.adapter=customAdapter
@@ -89,6 +90,19 @@ class MainActivity : AppCompatActivity() {
         */
 
         val customAdapter2 = CustomAdapter2(this, businessCardArrayList)
+
+        customAdapter2.setItemClickListener(object : CustomAdapter2.ItemClickListener{
+            override fun onClick(view: View,position:Int)
+            {
+                val item = businessCardArrayList[position]
+                binding.img3Main.setImageResource(item.img)
+            }
+
+            override fun onLongClick(view: View, position: Int) {
+                TODO("Not yet implemented")
+            }
+        })
+
         binding.recyclerview.adapter = customAdapter2
         val layout = LinearLayoutManager(this)
         binding.recyclerview.layoutManager = layout
@@ -140,18 +154,13 @@ class MainActivity : AppCompatActivity() {
                 slidePanel.panelState = SlidingUpPanelLayout.PanelState.COLLAPSED
             }
         }
+
         /*
-        binding.listviewMain.setOnItemClickListener { parent: AdapterView<*>, view: View, position: Int, id ->
-            Long
+        binding.listviewMain.setOnItemClickListener { parent: AdapterView<*>, view: View, position: Int, id -> Long
             val item = parent.getItemAtPosition(position) as BusinessCard
             binding.img3Main.setImageResource(item.img)
         }
         */
-
-        //binding.recyclerview.setOnClickListener()
-       // {
-        //    //
-        //}
 
         binding.img3Main.setOnClickListener()
         {
