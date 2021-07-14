@@ -35,6 +35,10 @@ class MainActivity : AppCompatActivity() {
         customAdapter = CustomAdapter(this,businessCardArrayList)
         //customAdapter2 = CustomAdapter2(this,businessCardArrayList)
         binding.listviewMain.adapter=customAdapter
+        binding.listviewMain.setNestedScrollingEnabled(true)
         //binding.recyclerview.adapter=customAdapter2
+        //binding.listviewMain.setOnClickListener{
+//
+       // }
     }
 }

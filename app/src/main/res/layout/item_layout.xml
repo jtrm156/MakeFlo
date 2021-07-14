@@ -8,7 +8,7 @@
     android:weightSum="7"
     >
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_listview_item"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
