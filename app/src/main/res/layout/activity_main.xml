@@ -195,14 +195,15 @@
                     <com.google.android.material.appbar.CollapsingToolbarLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                        app:layout_scrollFlags="scroll">
 
                             <com.google.android.material.appbar.MaterialToolbar
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@drawable/border"
-                                app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
-                                app:layout_collapseMode="pin">
+                                app:layout_scrollFlags="scroll"
+                                app:layout_collapseMode="pin"
+                                >
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -235,6 +236,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fillViewport="true"
+                android:scrollbars="vertical"
                 android:descendantFocusability="blocksDescendants"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                >
@@ -253,8 +255,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_layout"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                    tools:listitem="@layout/item_layout">
                 </androidx.recyclerview.widget.RecyclerView>
             </androidx.core.widget.NestedScrollView>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
@@ -359,8 +360,10 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:progress="0"
+            android:max="1000"
             android:progressTint="#344CD3"
-            android:progressBackgroundTint="#201F1F"
+            android:progressBackgroundTint="#353434"
             app:layout_constraintTop_toBottomOf="@id/coordinator"
             app:layout_constraintLeft_toRightOf="@id/gd_left1"
             app:layout_constraintRight_toLeftOf="@id/gd_right1"
@@ -580,6 +583,7 @@
                     android:descendantFocusability="blocksDescendants"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     >
+
                     <ListView
                         android:id="@+id/listview_main2"
                         android:layout_width="match_parent"
@@ -587,18 +591,49 @@
                         tools:listitem="@layout/item_layout"
                         android:divider="#201F1F"
                         />
+
+                        <!--
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerview2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:listitem="@layout/item_layout">
+                        </androidx.recyclerview.widget.RecyclerView>
+                        -->
                 </androidx.core.widget.NestedScrollView>
 
-                <!--<androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_layout"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
-                </androidx.recyclerview.widget.RecyclerView>
-                -->
+                    android:background="#344CD3"
+                    app:layout_constraintLeft_toRightOf="@id/gd_left1_2"
+                    app:layout_constraintRight_toLeftOf="@id/gd_right1_2"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:weightSum="5"
+                    >
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_weight="0.3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/icon_trash"
+                        android:adjustViewBounds="true"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt1_sub"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="삭제"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.3"/>
+
+                </LinearLayout>
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,6 +36,95 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="20dp"/>
 
+    <LinearLayout
+        android:id="@+id/linearlayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@id/txt2_sub"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:weightSum="6"
+        >
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt1_sub"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="재생목록"
+            android:textSize="25sp"
+            android:adjustViewBounds="true"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_weight="2"
+            />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text=""
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_weight="2.5"
+            />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt2_main"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text=""
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:layout_weight="0.7"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text=""
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_weight="0.1"
+            />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img1_sub"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/arrow_down"
+            android:adjustViewBounds="true"
+            android:layout_weight="0.7"/>
+
+    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt2_sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="노래 제목"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="22sp"
+        android:textColor='@color/white'
+        app:layout_constraintLeft_toRightOf="@id/gd_left2"
+        app:layout_constraintRight_toLeftOf="@id/gd_right2"
+        app:layout_constraintBottom_toTopOf="@id/txt3_sub"
+        android:layout_marginBottom="10dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt3_sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="가수 이름"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="15dp"
+        android:textColor="#7C7676"
+        app:layout_constraintLeft_toRightOf="@id/gd_left2"
+        app:layout_constraintRight_toLeftOf="@id/gd_right2"
+        app:layout_constraintBottom_toTopOf="@id/img2_sub"
+        android:layout_marginBottom="10dp"/>
+
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img2_sub"
         android:layout_width="wrap_content"
@@ -45,7 +134,19 @@
         app:layout_constraintRight_toLeftOf="@id/gd_right2"
         app:layout_constraintBottom_toTopOf="@id/linearlayout4"
         app:layout_constraintTop_toBottomOf="@id/gd_top2"/>
-
+    <ProgressBar
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:progress="0"
+            android:max="1000"
+            android:progressTint="#344CD3"
+            android:progressBackgroundTint="#353434"
+            app:layout_constraintBottom_toTopOf="@id/linearlayout4"
+            app:layout_constraintLeft_toRightOf="@id/gd_left2"
+            app:layout_constraintRight_toLeftOf="@id/gd_right2"
+            app:layout_constraintVertical_chainStyle="packed"/>
 
     <LinearLayout
         android:id="@+id/linearlayout4"
