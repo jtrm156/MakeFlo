@@ -15,19 +15,22 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout
 
 data class BusinessCard(val name:String,val contents:String, val img : Int, val length : Int)
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ItemDragListener {
 
     var businessCardArrayList = mutableListOf<BusinessCard>()
 
     var i : Boolean = true
     var j : Boolean = true
     //private lateinit var customAdapter : CustomAdapter
+
     lateinit var binding:ActivityMainBinding
 
     companion object{
         const val Music = "app_preferences"
     }
     private lateinit var mPreferences: SharedPreferences
+
+    private lateinit var itemTouchHelper : ItemTouchHelper
 
     inner class PanelEventListener : SlidingUpPanelLayout.PanelSlideListener {
         // 패널이 슬라이드 중일 때
@@ -81,7 +84,7 @@ class MainActivity : AppCompatActivity() {
             binding.img3Main.setImageResource(mPreferences.getInt("music_img", 0))
         }
 
-        val customAdapter2 = CustomAdapter2(this, businessCardArrayList)
+        val customAdapter2 = CustomAdapter2(this, businessCardArrayList, this)
 
         customAdapter2.setItemClickListener(object : CustomAdapter2.ItemClickListener{
             override fun onClick(view: View,position:Int)
@@ -184,5 +187,10 @@ class MainActivity : AppCompatActivity() {
             //intent.putExtra("data", mPreferences.getInt("music_img",0))
             startActivity(intent)
         }
+        itemTouchHelper = ItemTouchHelper(ItemTouchHelperCallback(customAdapter2))
+        itemTouchHelper.attachToRecyclerView(binding.recyclerview)
+    }
+    override fun onStartDrag(viewHolder: RecyclerView.ViewHolder){
+        itemTouchHelper.startDrag(viewHolder)
     }
 }
