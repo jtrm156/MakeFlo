@@ -3,20 +3,24 @@ package com.example.practice2
 import CustomAdapter2
 import android.content.Intent
 import android.content.SharedPreferences
+import android.drm.DrmStore
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.practice2.databinding.ActivityMainBinding
 import com.sothree.slidinguppanel.SlidingUpPanelLayout
-
 
 data class BusinessCard(val name:String,val contents:String, val img : Int, val length : Int)
 
 class MainActivity : AppCompatActivity() {
 
     var businessCardArrayList = mutableListOf<BusinessCard>()
+
     var i : Boolean = true
+    var j : Boolean = true
     //private lateinit var customAdapter : CustomAdapter
     lateinit var binding:ActivityMainBinding
 
@@ -98,6 +102,8 @@ class MainActivity : AppCompatActivity() {
         })
 
         binding.recyclerview.adapter = customAdapter2
+        binding.recyclerview2.adapter = customAdapter2
+
         val layout = LinearLayoutManager(this)
         binding.recyclerview.layoutManager = layout
         binding.recyclerview.setHasFixedSize(true)
@@ -117,6 +123,20 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        binding.img1Main2.setOnClickListener()
+        {
+            if (j == true) {
+                binding.img1Main.setImageResource(R.drawable.arrow_up)
+                //binding.listviewMain.visibility = View.GONE
+                binding.recyclerview2.visibility = View.GONE
+                j = false
+            } else {
+                binding.img1Main.setImageResource(R.drawable.arrow_down)
+                //binding.listviewMain.visibility = View.VISIBLE
+                binding.recyclerview2.visibility = View.VISIBLE
+                j = true
+            }
+        }
         binding.txt2Main.setOnClickListener()
         {
             val state = slidePanel.panelState
