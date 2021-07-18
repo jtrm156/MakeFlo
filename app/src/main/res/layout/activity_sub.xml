@@ -49,17 +49,15 @@
         android:weightSum="6"
         >
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txt1_sub"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="재생목록"
-            android:textSize="25sp"
-            android:adjustViewBounds="true"
+            android:text=""
             android:textStyle="bold"
             android:textColor="@color/white"
             android:layout_weight="2"
             />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -111,6 +109,16 @@
         app:layout_constraintBottom_toTopOf="@id/txt3_sub"
         android:layout_marginBottom="10dp"/>
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img5_sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/more_info"
+        app:layout_constraintRight_toLeftOf="@id/gd_right2"
+        app:layout_constraintLeft_toRightOf="@id/txt2_sub"
+        app:layout_constraintBottom_toTopOf="@id/txt3_sub"
+        />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt3_sub"
         android:layout_width="wrap_content"
@@ -124,6 +132,32 @@
         app:layout_constraintRight_toLeftOf="@id/gd_right2"
         app:layout_constraintBottom_toTopOf="@id/img2_sub"
         android:layout_marginBottom="10dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt4_sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enviyon on the mix\nNo no no no"
+        android:gravity="center"
+        android:textSize="17dp"
+        android:textColor="#7C7676"
+        app:layout_constraintLeft_toRightOf="@id/gd_left2"
+        app:layout_constraintRight_toLeftOf="@id/gd_right2"
+        app:layout_constraintTop_toBottomOf="@id/img2_sub"
+        android:layout_marginTop="20dp"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img4_sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/heart"
+        app:layout_constraintTop_toBottomOf="@id/txt4_sub"
+        app:layout_constraintLeft_toRightOf="@id/gd_left2"
+        app:layout_constraintRight_toLeftOf="@id/gd_right2"
+        app:layout_constraintBottom_toTopOf="@id/progressBar2"
+        android:layout_marginBottom="7dp"
+        />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img2_sub"
@@ -142,11 +176,11 @@
             android:progress="0"
             android:max="1000"
             android:progressTint="#344CD3"
-            android:progressBackgroundTint="#353434"
+            android:progressBackgroundTint="#494848"
             app:layout_constraintBottom_toTopOf="@id/linearlayout4"
             app:layout_constraintLeft_toRightOf="@id/gd_left2"
             app:layout_constraintRight_toLeftOf="@id/gd_right2"
-            app:layout_constraintVertical_chainStyle="packed"/>
+            app:layout_constraintTop_toBottomOf="@id/img4_sub"/>
 
     <LinearLayout
         android:id="@+id/linearlayout4"
