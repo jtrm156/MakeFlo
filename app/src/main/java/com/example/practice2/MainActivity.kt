@@ -7,12 +7,19 @@ import android.content.SharedPreferences
 import android.drm.DrmStore
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practice2.databinding.ActivityMainBinding
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonParseException
+import com.google.gson.reflect.TypeToken
 import com.sothree.slidinguppanel.SlidingUpPanelLayout
+import org.json.JSONArray
 
 data class BusinessCard(val name:String,val contents:String, val img : Int, val length : Int)
 
@@ -25,7 +32,7 @@ class MainActivity : AppCompatActivity(), ItemDragListener {
     var z : Boolean = true
     //private lateinit var customAdapter : CustomAdapter
 
-    lateinit var binding:ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
 
     companion object{
         const val Music = "app_preferences"
@@ -51,6 +58,7 @@ class MainActivity : AppCompatActivity(), ItemDragListener {
 
         }
     }
+    var checkboxbtnck: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +72,7 @@ class MainActivity : AppCompatActivity(), ItemDragListener {
         var slidePanel = binding.mainFrame
         slidePanel.addPanelSlideListener(PanelEventListener())
 
-        for (x in 0..30) {
+        for (x in 0..10) {
             businessCardArrayList.add(BusinessCard("WHAT WOULD YOU DO?(feat. Pink Sweat$)", "HONNE", R.drawable.music1,340))
             businessCardArrayList.add(BusinessCard("Understand(Feat. GIST)", "MELOH", R.drawable.music2,340))
             businessCardArrayList.add(BusinessCard("Good News", "Mac Miller", R.drawable.music3,340))
@@ -110,13 +118,13 @@ class MainActivity : AppCompatActivity(), ItemDragListener {
         customAdapter3.setItemClickListener(object : CustomAdapter3.ItemClickListener{
             override fun onClick(view: View,position:Int)
             {
-                TODO("Not yet implemented")
+                val item = businessCardArrayList[position]
             }
-
             override fun onLongClick(view: View, position: Int) {
                 TODO("Not yet implemented")
             }
         })
+
         binding.recyclerview.adapter = customAdapter2
         binding.recyclerview2.adapter = customAdapter3
 
@@ -128,11 +136,45 @@ class MainActivity : AppCompatActivity(), ItemDragListener {
         {
             if(binding.checkBox.isChecked){
                 binding.checkBox.setText("선택해제")
+                customAdapter3.selectAll(true)
             }
             else{
                 binding.checkBox.setText("전체선택")
+                customAdapter3.selectAll(false)
             }
         }
+
+        binding.txt4Main2.setOnClickListener()
+        {
+            val state2 = slidePanel.panelState
+
+            if (state2 == SlidingUpPanelLayout.PanelState.COLLAPSED) {
+                slidePanel.panelState = SlidingUpPanelLayout.PanelState.ANCHORED
+            } else if (state2 == SlidingUpPanelLayout.PanelState.EXPANDED) {
+                slidePanel.panelState = SlidingUpPanelLayout.PanelState.COLLAPSED
+                /*데이터를저장*/
+                val gson = Gson()
+                val json = gson.toJson(customAdapter3.businessCardArrayList)
+                preferencesEditor.putString("data", json)
+                preferencesEditor.apply()
+                Log.d("debug", "Data saved")
+            }
+            /*arraylist를 로드*/
+            if(mPreferences.contains("data")){
+                val gson = Gson()
+                val json = mPreferences.getString("data","")
+                try{
+                    val typeToken = object : TypeToken<MutableList<BusinessCard>>() {}.type
+                    customAdapter2.businessCardArrayList = gson.fromJson(json, typeToken)
+                }
+                catch ( e: JsonParseException){
+                    e.printStackTrace()
+                }
+                customAdapter2.notifyItemChanged(0,customAdapter2.businessCardArrayList.size)
+                Log.d("debug", "Data loaded")
+            }
+        }
+
         binding.img1Main.setOnClickListener()
         {
             if (i == true) {
@@ -176,6 +218,7 @@ class MainActivity : AppCompatActivity(), ItemDragListener {
                 z = true
             }
         }
+
         binding.txt2Main.setOnClickListener()
         {
             val state = slidePanel.panelState
@@ -199,17 +242,6 @@ class MainActivity : AppCompatActivity(), ItemDragListener {
             }
         }
 
-        binding.txt4Main2.setOnClickListener()
-        {
-            val state2 = slidePanel.panelState
-
-            if (state2 == SlidingUpPanelLayout.PanelState.COLLAPSED) {
-                slidePanel.panelState = SlidingUpPanelLayout.PanelState.ANCHORED
-            } else if (state2 == SlidingUpPanelLayout.PanelState.EXPANDED) {
-                slidePanel.panelState = SlidingUpPanelLayout.PanelState.COLLAPSED
-            }
-        }
-
         /*
         binding.listviewMain.setOnItemClickListener { parent: AdapterView<*>, view: View, position: Int, id -> Long
             val item = parent.getItemAtPosition(position) as BusinessCard
@@ -227,8 +259,55 @@ class MainActivity : AppCompatActivity(), ItemDragListener {
         itemTouchHelper.attachToRecyclerView(binding.recyclerview)
         itemTouchHelper = ItemTouchHelper(ItemTouchHelperCallback(customAdapter3))
         itemTouchHelper.attachToRecyclerView(binding.recyclerview2)
+        //Toast.makeText(this, "oncreate", Toast.LENGTH_SHORT).show()
     }
     override fun onStartDrag(viewHolder: RecyclerView.ViewHolder){
         itemTouchHelper.startDrag(viewHolder)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val customAdapter3 = CustomAdapter3(this, businessCardArrayList, this)
+        /*arraylist를 로드*/
+        if(mPreferences.contains("data")){
+            val gson = Gson()
+            val json = mPreferences.getString("data","")
+            try{
+                val typeToken = object : TypeToken<MutableList<BusinessCard>>() {}.type
+                customAdapter3.businessCardArrayList = gson.fromJson(json, typeToken)
+            }
+            catch ( e: JsonParseException){
+                e.printStackTrace()
+            }
+            customAdapter3.notifyItemChanged(0,customAdapter3.businessCardArrayList.size)
+            Log.d("debug", "Data loaded")
+        }
+        //Toast.makeText(this, "onstart", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+       // Toast.makeText(this, "onresume", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onPause(){
+        super.onPause()
+        //Toast.makeText(this, "onpause", Toast.LENGTH_SHORT).show()
+    }
+    override fun onStop() {
+        super.onStop()
+        mPreferences = getSharedPreferences(Music, MODE_PRIVATE);
+        val preferencesEditor: SharedPreferences.Editor = mPreferences.edit()
+        val customAdapter2 = CustomAdapter2(this, businessCardArrayList, this)
+
+        /*arraylist로 저장*/
+        val gson = Gson()
+        val json = gson.toJson(customAdapter2.businessCardArrayList)
+        preferencesEditor.putString("data", json)
+        preferencesEditor.apply()
+        Log.d("debug", "Data saved")
+
+
+        //Toast.makeText(this, "onstop", Toast.LENGTH_SHORT).show()
     }
 }

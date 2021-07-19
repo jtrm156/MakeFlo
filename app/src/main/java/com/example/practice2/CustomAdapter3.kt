@@ -1,5 +1,6 @@
 import android.content.Context
 import android.content.SharedPreferences
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -12,16 +13,29 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.practice2.*
 import com.example.practice2.databinding.ItemLayout2Binding
 
-data class UserCheckStatus(val position: Int, var isChecked: Boolean)
+data class checkboxData(
+    var checked: Boolean
+)
 
-class CustomAdapter3(private val context: Context, private val businessCardArrayList: MutableList<BusinessCard>, private val listener: ItemDragListener) :
+class CustomAdapter3(private val context: Context, var businessCardArrayList: MutableList<BusinessCard>, private val listener: ItemDragListener) :
     RecyclerView.Adapter<CustomAdapter3.ItemViewHolder>(), ItemActionListener {
     //Layout들과 RecyclerView를 연결시킬 Adapter(데이터를 받아오고 이를 레이아웃에 직접 연결하는 함수를 실행시키는 클래스)
+
+    fun selectAll(boolean: Boolean){
+        for(checkbox in checkboxList){
+            if(checkbox.checked == !boolean)
+            {
+                checkbox.checked = boolean
+            }
+        }
+        notifyDataSetChanged()
+    }
 
     companion object {
         const val Music = "app_preferences"
     }
-    private val userCheckBoxStatus = arrayListOf<UserCheckStatus>()
+
+    var checkboxList = arrayListOf<checkboxData>()
 
     interface ItemClickListener {
         fun onClick(view: View, position: Int)
@@ -36,7 +50,7 @@ class CustomAdapter3(private val context: Context, private val businessCardArray
 
     inner class ItemViewHolder(private val binding: ItemLayout2Binding, listener: ItemDragListener) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(businessCard: BusinessCard, context: Context) {
+        fun bind(businessCard: BusinessCard, num: Int, context: Context) {
 
             mPreferences = context.getSharedPreferences(Music, AppCompatActivity.MODE_PRIVATE);
             val preferencesEditor: SharedPreferences.Editor = mPreferences.edit()
@@ -50,18 +64,20 @@ class CustomAdapter3(private val context: Context, private val businessCardArray
             binding.contentsListviewItem12.text = businessCard.contents
             binding.nameListviewItem12.text = businessCard.name
 
-            binding.checkBox2.setOnClickListener{
+            checkboxList.add(num, checkboxData(false))
+
+            binding.checkBox2.isChecked = checkboxList[num].checked
+
+            binding.checkBox2.setOnClickListener {
                 if(binding.checkBox2.isChecked){
-                    preferencesEditor.putBoolean("checkbox_check",binding.checkBox2.isChecked)
-                    preferencesEditor.apply()
+                    checkboxList[num].checked = true
                 }
                 else{
-                    preferencesEditor.putBoolean("checkbox_check",binding.checkBox2.isChecked)
-                    preferencesEditor.apply()
+                    checkboxList[num].checked = false
                 }
-                binding.checkBox2.isChecked = mPreferences.getBoolean("checkbox_check",true)
             }
         }
+
         init{
             binding.imgListviewItem13.setOnTouchListener{v, event ->
                 if(event.action == MotionEvent.ACTION_DOWN){
@@ -78,7 +94,7 @@ class CustomAdapter3(private val context: Context, private val businessCardArray
     } //화면을 최초 로딩하여 만들어진 View가 없는 경우 레이아웃을 inflate하여 viewHolder를 생성
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.bind(businessCardArrayList[position], context)
+        holder.bind(businessCardArrayList[position], position, context)
 
         holder.itemView.setOnClickListener {
             itemClickListener.onClick(it, position)
@@ -102,6 +118,6 @@ class CustomAdapter3(private val context: Context, private val businessCardArray
     override fun onItemSwiped(position: Int){
         businessCardArrayList.removeAt(position)
         notifyItemRemoved(position)
+        notifyDataSetChanged()
     }
-
 } //아이템 갯수를 리턴처리하면 된다.

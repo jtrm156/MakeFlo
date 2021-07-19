@@ -14,7 +14,7 @@ import com.example.practice2.R
 import com.example.practice2.databinding.ItemLayoutBinding
 
 
-class CustomAdapter2(private val context: Context, private val businessCardArrayList: MutableList<BusinessCard>, private val listener: ItemDragListener) :
+class CustomAdapter2(private val context: Context, var businessCardArrayList: MutableList<BusinessCard>, private val listener: ItemDragListener) :
     RecyclerView.Adapter<CustomAdapter2.ItemViewHolder>(), ItemActionListener {
     //Layout들과 RecyclerView를 연결시킬 Adapter(데이터를 받아오고 이를 레이아웃에 직접 연결하는 함수를 실행시키는 클래스)
     //inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
