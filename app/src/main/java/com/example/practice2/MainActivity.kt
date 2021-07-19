@@ -1,6 +1,7 @@
 package com.example.practice2
 
 import CustomAdapter2
+import CustomAdapter3
 import android.content.Intent
 import android.content.SharedPreferences
 import android.drm.DrmStore
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity(), ItemDragListener {
 
     var i : Boolean = true
     var j : Boolean = true
+    var z : Boolean = true
     //private lateinit var customAdapter : CustomAdapter
 
     lateinit var binding:ActivityMainBinding
@@ -85,6 +87,7 @@ class MainActivity : AppCompatActivity(), ItemDragListener {
         }
 
         val customAdapter2 = CustomAdapter2(this, businessCardArrayList, this)
+        val customAdapter3 = CustomAdapter3(this, businessCardArrayList, this)
 
         customAdapter2.setItemClickListener(object : CustomAdapter2.ItemClickListener{
             override fun onClick(view: View,position:Int)
@@ -104,13 +107,32 @@ class MainActivity : AppCompatActivity(), ItemDragListener {
             }
         })
 
+        customAdapter3.setItemClickListener(object : CustomAdapter3.ItemClickListener{
+            override fun onClick(view: View,position:Int)
+            {
+                TODO("Not yet implemented")
+            }
+
+            override fun onLongClick(view: View, position: Int) {
+                TODO("Not yet implemented")
+            }
+        })
         binding.recyclerview.adapter = customAdapter2
-        binding.recyclerview2.adapter = customAdapter2
+        binding.recyclerview2.adapter = customAdapter3
 
         val layout = LinearLayoutManager(this)
         binding.recyclerview.layoutManager = layout
         binding.recyclerview.setHasFixedSize(true)
 
+        binding.checkBox.setOnClickListener()
+        {
+            if(binding.checkBox.isChecked){
+                binding.checkBox.setText("선택해제")
+            }
+            else{
+                binding.checkBox.setText("전체선택")
+            }
+        }
         binding.img1Main.setOnClickListener()
         {
             if (i == true) {
@@ -138,6 +160,20 @@ class MainActivity : AppCompatActivity(), ItemDragListener {
                 //binding.listviewMain.visibility = View.VISIBLE
                 binding.recyclerview2.visibility = View.VISIBLE
                 j = true
+            }
+        }
+
+        binding.txt5Main2.setOnClickListener(){
+            if (z == true) {
+                binding.img1Main.setImageResource(R.drawable.arrow_up)
+                //binding.listviewMain.visibility = View.GONE
+                binding.recyclerview2.visibility = View.GONE
+                z = false
+            } else {
+                binding.img1Main.setImageResource(R.drawable.arrow_down)
+                //binding.listviewMain.visibility = View.VISIBLE
+                binding.recyclerview2.visibility = View.VISIBLE
+                z = true
             }
         }
         binding.txt2Main.setOnClickListener()
@@ -189,6 +225,8 @@ class MainActivity : AppCompatActivity(), ItemDragListener {
         }
         itemTouchHelper = ItemTouchHelper(ItemTouchHelperCallback(customAdapter2))
         itemTouchHelper.attachToRecyclerView(binding.recyclerview)
+        itemTouchHelper = ItemTouchHelper(ItemTouchHelperCallback(customAdapter3))
+        itemTouchHelper.attachToRecyclerView(binding.recyclerview2)
     }
     override fun onStartDrag(viewHolder: RecyclerView.ViewHolder){
         itemTouchHelper.startDrag(viewHolder)

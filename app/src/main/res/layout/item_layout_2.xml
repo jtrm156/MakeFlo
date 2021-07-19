@@ -6,18 +6,27 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#201F1F"
-    android:weightSum="7"
+    android:weightSum="7.1"
     >
-
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1"
+        android:layout_gravity="center"
+        android:checked="false"
+        android:buttonTint="#7C7676"
+        android:layout_marginLeft="10dp"
+        />
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_listview_item"
+        android:id="@+id/img_listview_item11"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
         android:src="@mipmap/ic_launcher"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"/>
 
@@ -29,33 +38,33 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/name_listview_item"
+            android:id="@+id/name_listview_item12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="음악 이름"
-            android:textColor="@drawable/listitem_textcolor_selector"
+            android:textColor="@color/white"
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/contents_listview_item"
+            android:id="@+id/contents_listview_item12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="가수 이름"
-            android:textColor="@drawable/listitem_textcolor_selector2"
+            android:textColor="#7C7676"
             android:textSize="10sp" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_listview_item2"
+        android:id="@+id/img_listview_item13"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.7"
         android:adjustViewBounds="true"
-        android:src="@drawable/more_info"
+        android:src="@drawable/icon_menu"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:layout_gravity="center"
